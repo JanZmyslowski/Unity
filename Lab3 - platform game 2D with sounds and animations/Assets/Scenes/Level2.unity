@@ -257,6 +257,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 788225404}
+    - target: {fileID: 1860610842908585852, guid: 62a18e1663f503c40aa88b597e0df83b,
+        type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1860610842908585853, guid: 62a18e1663f503c40aa88b597e0df83b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -722,6 +727,11 @@ PrefabInstance:
       propertyPath: m_jumpForce
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4968054183949683810, guid: 2e2183501755a214591e802f3aff33d2,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1120347449}
     m_RemovedComponents:
     - {fileID: 114850797635947820, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
     - {fileID: 114926350374723154, guid: 2e2183501755a214591e802f3aff33d2, type: 3}
@@ -738,11 +748,11 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 221486005}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &221486009
+--- !u!114 &221486009 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4968054183949683810, guid: 2e2183501755a214591e802f3aff33d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 221486005}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221486007}
   m_Enabled: 1
@@ -750,10 +760,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a08176df2c7ed449b74ce060c0bd5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_speed: 1
-  m_jumpForce: 2.5
-  controller: {fileID: 1120347449}
-  sword: {fileID: 0}
 --- !u!114 &221486010
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class Runing : StateMachineBehaviour
 {
-    public AudioSource successfulHitSound;
-    public AudioClip hitSound;
+    public AudioSource steepAudio;
+    public AudioClip steepSound;
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (successfulHitSound == null)
+        if (steepAudio == null)
         {
-            successfulHitSound = animator.GetComponent<AudioSource>();
+            steepAudio = animator.GetComponent<AudioSource>();
         }
-        successfulHitSound.loop = true;
-        //successfulHitSound.enabled = true;
-        successfulHitSound.Play();
+        steepAudio.loop = true;
+        steepAudio.Play();
 
     }
 
@@ -28,7 +27,7 @@ public class Runing : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        successfulHitSound.Stop();
+        steepAudio.Stop();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

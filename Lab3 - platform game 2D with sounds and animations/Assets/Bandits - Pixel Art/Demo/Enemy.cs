@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private Animator m_animator;
     private Rigidbody2D m_body2d;
     private bool goingLeft = false;
+    private AudioSource steepAudio;
 
   
     // Use this for initialization
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
+        steepAudio = GetComponent<AudioSource>();
 
     }
 
@@ -42,6 +44,7 @@ public class Enemy : MonoBehaviour
     public void makeDisable()
     {
         this.enable = false;
+        steepAudio.Stop();
         m_body2d.velocity = new Vector2(0, 0);
         m_animator.speed = 0;
     }
@@ -77,9 +80,5 @@ public class Enemy : MonoBehaviour
                 goingLeft = true;
             }
         }
-
-        
-
-
     }
 }

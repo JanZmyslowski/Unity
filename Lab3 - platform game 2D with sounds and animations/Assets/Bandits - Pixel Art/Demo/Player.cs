@@ -22,6 +22,7 @@ public class Player : MonoBehaviour {
     private bool                m_isDead = false;
     private bool movingEnable = true;
     private bool isWatchingLeft = true;
+    private AudioSource steepAudio;
     // Use this for initialization
     void Start () {
         m_animator = GetComponent<Animator>();
@@ -29,26 +30,29 @@ public class Player : MonoBehaviour {
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
         sword = GameObject.FindGameObjectWithTag("Sword");
         sword.gameObject.SetActive(false);
+        steepAudio = GetComponent<AudioSource>();
         //sword.transform.position = new Vector3(sword.transform.position.x, transform.position.y, 200); 
     }
 	
     public void MakeDead()
     {
-        m_isDead = true;
         m_animator.SetTrigger("Death");
-        m_animator.speed = 0;
+        steepAudio.Stop();
+        m_isDead = true;
+        //m_animator.speed = 0;
 
     }
     public void MakeLife()
     {
-        m_animator.SetTrigger("Recover");
+        m_animator.SetTrigger("Respawn");
         m_isDead = false;
 
     }
     public void DisableMoveing()
     {
         movingEnable = false;
-        m_animator.speed = 0;
+        m_animator.SetInteger("AnimState", 0);
+       // m_animator.speed = 0;
         m_body2d.velocity = new Vector2(0, 0);
 
     }
@@ -96,7 +100,6 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        //Check if character just landed on the ground
         if (!m_isDead && movingEnable)
         {
             if (!m_grounded && m_groundSensor.State())
@@ -105,17 +108,14 @@ public class Player : MonoBehaviour {
                 m_animator.SetBool("Grounded", m_grounded);
             }
 
-            //Check if character just started falling
             if (m_grounded && !m_groundSensor.State())
             {
                 m_grounded = false;
                 m_animator.SetBool("Grounded", m_grounded);
             }
 
-            // -- Handle input and movement --
             float inputX = Input.GetAxis("Horizontal");
 
-            // Swap direction of sprite depending on walk direction
             if (inputX > 0)
             {
                 GetComponent<SpriteRenderer>().flipX = true;
@@ -130,19 +130,14 @@ public class Player : MonoBehaviour {
             // Move
             m_body2d.velocity = new Vector2(inputX * m_speed, m_body2d.velocity.y);
 
-            //Set AirSpeed in animator
-            m_animator.SetFloat("AirSpeed", m_body2d.velocity.y);
-
-            // -- Handle Animations -- 
+            
             //Jump
             if (Input.GetKeyDown("space") && m_grounded)
             {
-                m_animator.SetTrigger("Jump");
                 m_grounded = false;
                 m_animator.SetBool("Grounded", m_grounded);
                 m_body2d.velocity = new Vector2(m_body2d.velocity.x, m_jumpForce);
                 m_groundSensor.Disable(0.2f);
-                //SpawnBullet(sword);
 
             }
             //Fight
@@ -152,7 +147,7 @@ public class Player : MonoBehaviour {
             }
             //Run
             else if (Mathf.Abs(inputX) > Mathf.Epsilon)
-                m_animator.SetInteger("AnimState", 2);
+                m_animator.SetInteger("AnimState", 1);
             //Idle
             else
                 m_animator.SetInteger("AnimState", 0);
@@ -171,5 +166,5 @@ public class Player : MonoBehaviour {
         bullet.transform.position = new Vector3(isWatchingLeft ? m_body2d.position.x - 0.3f: m_body2d.position.x + 0.3f , m_body2d.position.y+0.3f);
         bullet.transform.eulerAngles = new Vector3(0, 0, isWatchingLeft ? -180 : 0);
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(isWatchingLeft ? -1 : 1,0.6f);
-\    }
+   }
 }

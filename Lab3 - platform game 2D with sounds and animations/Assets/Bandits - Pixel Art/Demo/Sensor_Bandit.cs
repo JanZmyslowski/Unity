@@ -21,24 +21,12 @@ public class Sensor_Bandit : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //if(other.gameObject.tag == "Diamond")
-        //{
-        //    Destroy(other.gameObject);
-        //}
-        //if (other.gameObject.tag == "Enemy")
-        //{
-            
-        //    Debug.Log("hit!");
-        //}
         m_ColCount++;
-        //Debug.Log(m_ColCount);
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         m_ColCount--;
-        //Debug.Log(m_ColCount);
-
     }
 
     void Update()

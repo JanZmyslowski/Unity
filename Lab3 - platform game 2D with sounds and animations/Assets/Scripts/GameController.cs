@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
         }
         if (currPoints == point_per_lvl)
         {
+            player.DisableMoveing();
             if (nextLvl != "End")
             {
                 StartCoroutine(NextLvl());
